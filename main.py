@@ -1,5 +1,6 @@
 import requests
-import json
+from secrets import API_FOR_GET_REQUEST
+from requests.auth import HTTPBasicAuth
 
 
 def print_red_text(text_str: str):
@@ -16,7 +17,7 @@ def safe_get_request(url: str):
     response = None
     try:
         # if request.get() throws an exception, the 'response' variable will remain as 'None'
-        response = requests.get(url, headers=HEADER_FOR_GET_REQUEST)
+        response = requests.get(url, auth=HTTPBasicAuth(API_FOR_GET_REQUEST, 'pass'))
         print(f'GET request executed with no errors. Response object created:\n'
               f'Response object: <{hex(id(response))}>\n')
     except requests.exceptions.RequestException as requests_exception:
@@ -43,15 +44,12 @@ def issue_get_request(target_url: str):
         return response_obj
 
 
-HEADER_FOR_GET_REQUEST = (
-    {
-     }
-)
-
-
 def main():
+
     base_url = 'https://joaoalves.wufoo.com/api/v3/forms/cubes-project-proposal-submission/entries/json'
     response_obj = issue_get_request(base_url)
+
+    print(response_obj.text)
 
     data_out_file = open('data_output.txt', 'w')
     data_out_file.write(response_obj.text)
