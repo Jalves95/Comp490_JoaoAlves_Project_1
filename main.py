@@ -47,12 +47,25 @@ def issue_get_request(target_url: str):
 def main():
 
     base_url = 'https://joaoalves.wufoo.com/api/v3/forms/cubes-project-proposal-submission/entries/json'
-    response_obj = issue_get_request(base_url)
+    json_data = issue_get_request(base_url)
+    # print(json_data.text)
 
-    print(response_obj.text)
+    # for line in json_data.text:
+    #     data = line.strip('\n').strip('\t')  # strip to remove whitespaces
+    #     print(data)
+
+#   print(json.dumps(json_data.text))
+    print(json_data.text)
+    print(json_data.json())
+
+    json_data_text = json_data.text
 
     data_out_file = open('data_output.txt', 'w')
-    data_out_file.write(response_obj.text)
+    data_out_file.write(json_data_text.strip('\n'))
+    #
+    # for i in range(10):
+    #     data_out_file.write("This is line %d\r\n" % (i+1))
+    #
     data_out_file.close()
 
 
