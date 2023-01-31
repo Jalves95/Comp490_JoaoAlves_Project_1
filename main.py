@@ -1,5 +1,4 @@
 import json
-
 import requests
 from secrets import API_FOR_GET_REQUEST
 from requests.auth import HTTPBasicAuth
