@@ -1,0 +1,170 @@
+import sqlite3
+import json
+import requests
+from secrets import API_FOR_GET_REQUEST
+from requests.auth import HTTPBasicAuth
+import sys
+
+base_url = "https://joaoalves.wufoo.com/api/v3/forms/cubes-project-proposal-submission/entries/json"
+
+
+def print_red_text(text_str: str):
+    """ Prints the incoming string parameter as RED text to the terminal """
+
+    print(f'\033[91m{text_str}\033[00m')
+
+
+def safe_get_request() -> dict:
+    """ This function makes a Get request to the URL passed in as its single parameter.
+    If an exception is thrown while trying to execute the GET request, 'None' is returned
+    in place of a response object. If the GET request is successful, a response object is returned. """
+
+    try:
+        # if request.get() throws an exception, the 'response' variable will remain as 'None'
+        response = requests.get(base_url, auth=HTTPBasicAuth(API_FOR_GET_REQUEST, 'pass'))
+        if response.status_code != 200:  # if we don't get an ok response we have trouble
+            print(f"Failed to get data, response code:{response.status_code} and error message: {response.reason} ")
+            sys.exit(-1)
+        print(f'GET request executed with no errors. Response object created:\n'
+                f'Response object: <{hex(id(response))}>\n')
+    except requests.exceptions.RequestException as requests_exception:
+        print_red_text(f'GET requests FAILED with the following error: {requests_exception}\n')
+    finally:
+        jsonresponse = response.json()
+        return jsonresponse
+
+
+def establish_database_connection(database_name: str):
+    """ This function tries to connect to a database with the name according to the incoming string
+    A database connection object is returned if successful
+    'None' is returned if a connection was unable to be established """
+
+    db_connection = None
+    try:
+        db_connection = sqlite3.connect(database_name)
+        print(f'Connection to database was \'{database_name}\' was established'
+              f' database connection: {db_connection}\n')
+    except sqlite3.Error as db_error:
+        print_red_text(f'An error occurred while trying to connect to database {database_name}:'
+                       f'{db_error}')
+    finally:
+        return db_connection
+
+
+def create_db_cursor(db_connection_obj: sqlite3.Connection):
+    """ This function creates a sqlite3 Cursor object on the database connection
+        incoming as its single parameter. 'None' is returned if the cursor object
+        could not be created """
+
+    cursor_obj = None
+    if db_connection_obj is None:
+        print_red_text(f'Cursor object Not created: No connection object!\n')
+        return None
+    try:
+        cursor_obj = db_connection_obj.cursor()
+        print(f'Cursor object created on {db_connection_obj}\n'
+              f'Cursor object: {cursor_obj}\n')
+    except sqlite3.Error as db_error:
+        print_red_text(f'A cursor object could not be created on database connection {db_connection_obj}\n'
+                       f'{db_error}\n')
+    finally:
+        return cursor_obj
+
+
+def create_table():
+    """Creates tables for database"""
+    try:
+        create_wufoo_db()
+    except sqlite3.Error as db_error:
+        print_red_text(f'A database error occurred while creating tables: {db_error}\n')
+    finally:
+        print(f'Tables have been created with no errors\n')
+
+
+def create_db_connection():
+    """Creates database connection and returns that connection"""
+    db_name = 'wufoo_data.db'
+    db_connection = establish_database_connection(db_name)
+    return db_connection
+
+
+def save_data(data_to_save: list, save_file=None):
+    """ Provided by Dr. Santore's sprint 1 solution"""
+
+    for entry in data_to_save:
+        for key, value in entry.items():
+            print(f"{key}: {value}", file=save_file)
+        # now print the spacer
+        print("+++++++++++++++++++++++++++++++++++++++++++++\n_______________________________________________",
+              file=save_file)
+
+
+def create_wufoo_db():
+    """Creates wufoo table in database"""
+
+    # json_data = issue_get_request(base_url)
+    # json_obj = json_data.json()
+
+    data = safe_get_request()
+    data1 = data['Entries']
+    file_to_save = open("data_output.txt", 'w')
+    save_data(data1, save_file=file_to_save)
+
+    # organized_json = json.loads(json_data.text)
+    # print(json.dumps(organized_json, indent=2))
+
+    # Creates database connection
+    db_connection = create_db_connection()
+    # Creates cursor object
+    db_cursor_object = create_db_cursor(db_connection)
+    db_cursor_object.execute('''CREATE TABLE IF NOT EXISTS wufoo_data(
+                                Entry TEXT,
+                                Prefix TEXT,
+                                Name TEXT,
+                                Title TEXT,
+                                Organization TEXT,
+                                Email TEXT,
+                                Website TEXT,
+                                Phone TEXT,
+                                Opportunities TEXT,
+                                Collaboration TEXT,
+                                Participation TEXT
+                                );''')
+    # Clears table if data in it from previous use
+    db_cursor_object.execute('DELETE FROM wufoo_data')
+
+    for dict_entry in data1:
+        db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                                 (dict_entry.get('Entry', None),
+                                  dict_entry.get('Prefix', None),
+                                  dict_entry.get('Name', None),
+                                  dict_entry.get('Title', None),
+                                  dict_entry.get('Organization', None),
+                                  dict_entry.get('Email', None),
+                                  dict_entry.get('Website', None),
+                                  dict_entry.get('Phone', None),
+                                  dict_entry.get('Opportunities', None),
+                                  dict_entry.get('Collaboration', None),
+                                  dict_entry.get('Participation', None)))
+
+        db_connection.commit()
+
+
+# def add_to_wufoo_table(Entry, Prefix, Name, Title, Organization, Email, Website, Phone,
+#                        Opportunities, Collaboration, Participation):
+#     """Adds gathered data to webcams table"""
+#     db_connection = None
+#     try:
+#         # Creates database connection
+#         db_connection = create_db_connection()
+#         # Creates cursor object
+#         db_cursor_object = create_db_cursor(db_connection)
+#         db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+#                                  (Entry, Prefix, Name, Title, Organization, Email, Website, Phone,
+#                                   Opportunities, Collaboration, Participation))
+#     except sqlite3.Error as error:
+#         print(f"Database error occurred when adding to table: {error}")
+#     finally:
+#         if db_connection:
+#             db_connection.commit()
+#             db_connection.close()
