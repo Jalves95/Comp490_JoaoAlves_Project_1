@@ -103,16 +103,11 @@ def save_data(data_to_save: list, save_file=None):
 def create_wufoo_db():
     """Creates wufoo table in database"""
 
-    # json_data = issue_get_request(base_url)
-    # json_obj = json_data.json()
-
     data = safe_get_request()
     data1 = data['Entries']
+    print(data1)
     file_to_save = open("data_output.txt", 'w')
     save_data(data1, save_file=file_to_save)
-
-    # organized_json = json.loads(json_data.text)
-    # print(json.dumps(organized_json, indent=2))
 
     # Creates database connection
     db_connection = create_db_connection()
@@ -121,7 +116,8 @@ def create_wufoo_db():
     db_cursor_object.execute('''CREATE TABLE IF NOT EXISTS wufoo_data(
                                 Entry TEXT,
                                 Prefix TEXT,
-                                Name TEXT,
+                                First_Name TEXT,
+                                Last_Name TEXT,
                                 Title TEXT,
                                 Organization TEXT,
                                 Email TEXT,
@@ -135,18 +131,19 @@ def create_wufoo_db():
     db_cursor_object.execute('DELETE FROM wufoo_data')
 
     for dict_entry in data1:
-        db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                                 (dict_entry.get('Entry', None),
-                                  dict_entry.get('Prefix', None),
-                                  dict_entry.get('Name', None),
-                                  dict_entry.get('Title', None),
-                                  dict_entry.get('Organization', None),
-                                  dict_entry.get('Email', None),
-                                  dict_entry.get('Website', None),
-                                  dict_entry.get('Phone', None),
-                                  dict_entry.get('Opportunities', None),
-                                  dict_entry.get('Collaboration', None),
-                                  dict_entry.get('Participation', None)))
+        db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                                 (dict_entry.get('EntryId', None),
+                                  dict_entry.get('Field3', None),
+                                  dict_entry.get('Field4', None),
+                                  dict_entry.get('Field5', None),
+                                  dict_entry.get('Field218', None),
+                                  dict_entry.get('Field12', None),
+                                  dict_entry.get('Field13', None),
+                                  dict_entry.get('Field18', None),
+                                  dict_entry.get('Field15', None),
+                                  dict_entry.get('Field22', None),
+                                  dict_entry.get('Field119', None),
+                                  dict_entry.get('Field216', None)))
 
         db_connection.commit()
 
