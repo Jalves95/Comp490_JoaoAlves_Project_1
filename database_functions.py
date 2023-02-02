@@ -23,15 +23,16 @@ def safe_get_request() -> dict:
         # if request.get() throws an exception, the 'response' variable will remain as 'None'
         response = requests.get(base_url, auth=HTTPBasicAuth(API_FOR_GET_REQUEST, 'pass'))
         if response.status_code != 200:  # if we don't get an ok response we have trouble
-            print(f"Failed to get data, response code:{response.status_code} and error message: {response.reason} ")
-            sys.exit(-1)
+            print_red_text(f"Failed to get data, response code:{response.status_code} and error message:"
+                           f" {response.reason} ")
         print(f'GET request executed with no errors. Response object created:\n'
-                f'Response object: <{hex(id(response))}>\n')
+              f'Response object: <{hex(id(response))}>\n')
     except requests.exceptions.RequestException as requests_exception:
         print_red_text(f'GET requests FAILED with the following error: {requests_exception}\n')
     finally:
-        jsonresponse = response.json()
-        return jsonresponse
+        print(f'The Get request was successful \n{response.status_code}[{response.reason}]\n')
+        json_response = response.json()
+        return json_response
 
 
 def establish_database_connection(database_name: str):
