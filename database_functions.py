@@ -174,4 +174,3 @@ def create_wufoo_db():
 
         db_connection.commit()
 
-
