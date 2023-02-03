@@ -116,12 +116,11 @@ def create_wufoo_db():
     db_cursor_object.execute('''CREATE TABLE IF NOT EXISTS wufoo_data(
                                 Entry TEXT,
                                 Prefix TEXT,
-                                First_Name TEXT,
-                                Last_Name TEXT,
+                                Name TEXT,
                                 Title TEXT,
-                                Organization TEXT,
+                                Organization_Name TEXT,
                                 Email TEXT,
-                                Website TEXT,
+                                Organization_Website TEXT,
                                 Phone TEXT,
                                 Opportunities TEXT,
                                 Collaboration TEXT,
@@ -131,38 +130,36 @@ def create_wufoo_db():
     db_cursor_object.execute('DELETE FROM wufoo_data')
 
     for dict_entry in data1:
-        db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+        space = ' '
+        name_var = dict_entry.get('Field4', None)
+        name_var2 = dict_entry.get('Field5', None)
+        opp_var = dict_entry.get('Field16', None)
+        opp_var2 = dict_entry.get('Field17', None)
+        opp_var3 = dict_entry.get('Field18', None)
+        opp_var4 = dict_entry.get('Field19', None)
+        opp_var5 = dict_entry.get('Field20', None)
+        opp_var6 = dict_entry.get('Field21', None)
+        opp_var7 = dict_entry.get('Field22', None)
+        collab_var = dict_entry.get('Field116', None)
+        collab_var2 = dict_entry.get('Field117', None)
+        collab_var3 = dict_entry.get('Field118', None)
+        collab_var4 = dict_entry.get('Field119', None)
+        collab_var5 = dict_entry.get('Field120', None)
+
+        db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                                  (dict_entry.get('EntryId', None),
                                   dict_entry.get('Field3', None),
-                                  dict_entry.get('Field4', None),
-                                  dict_entry.get('Field5', None),
+                                  name_var + space + name_var2,
                                   dict_entry.get('Field218', None),
                                   dict_entry.get('Field12', None),
                                   dict_entry.get('Field13', None),
-                                  dict_entry.get('Field18', None),
+                                  dict_entry.get('Field14', None),
                                   dict_entry.get('Field15', None),
-                                  dict_entry.get('Field22', None),
-                                  dict_entry.get('Field119', None),
+                                  opp_var + space + opp_var2 + space + opp_var3 + space + opp_var4 + space + opp_var5
+                                  + space + opp_var6 + space + opp_var7,
+                                  collab_var + collab_var2 + collab_var3 + collab_var4 + collab_var5,
                                   dict_entry.get('Field216', None)))
 
         db_connection.commit()
 
 
-# def add_to_wufoo_table(Entry, Prefix, Name, Title, Organization, Email, Website, Phone,
-#                        Opportunities, Collaboration, Participation):
-#     """Adds gathered data to webcams table"""
-#     db_connection = None
-#     try:
-#         # Creates database connection
-#         db_connection = create_db_connection()
-#         # Creates cursor object
-#         db_cursor_object = create_db_cursor(db_connection)
-#         db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-#                                  (Entry, Prefix, Name, Title, Organization, Email, Website, Phone,
-#                                   Opportunities, Collaboration, Participation))
-#     except sqlite3.Error as error:
-#         print(f"Database error occurred when adding to table: {error}")
-#     finally:
-#         if db_connection:
-#             db_connection.commit()
-#             db_connection.close()
