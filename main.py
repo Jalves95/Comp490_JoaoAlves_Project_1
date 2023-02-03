@@ -6,7 +6,7 @@ from requests.auth import HTTPBasicAuth
 
 def print_red_text(text_str: str):
     """ Prints the incoming string parameter as RED text to the terminal """
-
+# add comment to test workflow
     print(f'\033[91m{text_str}\033[00m')
 
 
