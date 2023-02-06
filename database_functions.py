@@ -122,7 +122,7 @@ def create_wufoo_db():
                                     Organization_Name TEXT,
                                     Email TEXT,
                                     Organization_Website TEXT,
-                                    Phone TEXT,
+                                    Phone_Number TEXT,
                                     Opportunities TEXT,
                                     Opportunities_2 TEXT,
                                     Opportunities_3 TEXT,
@@ -130,11 +130,11 @@ def create_wufoo_db():
                                     Opportunities_5 TEXT,
                                     Opportunities_6 TEXT,
                                     Opportunities_7 TEXT,
-                                    Collaboration TEXT,
-                                    Collaboration_2 TEXT,
-                                    Collaboration_3 TEXT,
-                                    Collaboration_4 TEXT,
-                                    Collaboration_5 TEXT,
+                                    Collaboration_Date TEXT,
+                                    Collaboration_Date_2 TEXT,
+                                    Collaboration_Date_3 TEXT,
+                                    Collaboration_Date_4 TEXT,
+                                    Collaboration_Date_5 TEXT,
                                     Participation TEXT
                                     );''')
         # Clears table if data in it from previous use
