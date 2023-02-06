@@ -1,0 +1,168 @@
+EntryId: 1
+Field3: Mr.
+Field4: John
+Field5: Cable
+Field218: IT
+Field12: IT4US
+Field13: JCablw77@gmail.com
+Field14: 
+Field15: 1255557575
+Field16: 
+Field17: 
+Field18: 
+Field19: 
+Field20: Internships
+Field21: 
+Field22: 
+Field116: 
+Field117: 
+Field118: Spring 2023 (January 2023- April 2023)
+Field119: 
+Field120: 
+Field216: Yes
+DateCreated: 2023-01-24 20:19:48
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
+EntryId: 2
+Field3: Mrs.
+Field4: Hella
+Field5: Jones
+Field218: Front Desk
+Field12: IPOrganization
+Field13: Hella4Jones@gmail.com
+Field14: 
+Field15: 5573311222
+Field16: 
+Field17: 
+Field18: Site Visit
+Field19: 
+Field20: 
+Field21: 
+Field22: Networking Event
+Field116: 
+Field117: 
+Field118: 
+Field119: Summer 2023 (June 2023- August 2023)
+Field120: 
+Field216: Yes
+DateCreated: 2023-01-24 20:21:00
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
+EntryId: 3
+Field3: Mr.
+Field4: James
+Field5: Sousa
+Field218: Manager
+Field12: Walmart
+Field13: JSousa@gmail.com
+Field14: 
+Field15: 5081112525
+Field16: Course Project
+Field17: 
+Field18: Site Visit
+Field19: 
+Field20: 
+Field21: 
+Field22: Networking Event
+Field116: Summer 2022 (June 2022- August 2022)
+Field117: 
+Field118: 
+Field119: 
+Field120: 
+Field216: Yes
+DateCreated: 2023-02-03 14:03:35
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
+EntryId: 4
+Field3: Mrs.
+Field4: Morgan
+Field5: Tall
+Field218: Student
+Field12: BSU
+Field13: M7Tall@student.bridgew.du
+Field14: BSU@bsu.edu
+Field15: 5085515155
+Field16: 
+Field17: 
+Field18: 
+Field19: 
+Field20: Internships
+Field21: 
+Field22: 
+Field116: 
+Field117: 
+Field118: 
+Field119: Summer 2023 (June 2023- August 2023)
+Field120: 
+Field216: Yes
+DateCreated: 2023-02-03 14:10:27
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
+EntryId: 5
+Field3: Dr.
+Field4: Matt
+Field5: Alex
+Field218: Professor
+Field12: Computer Science
+Field13: M2Alex@bridgew.edu
+Field14: bsu@bridgew.edu
+Field15: 7740000000
+Field16: Course Project
+Field17: Guest Speaker
+Field18: Site Visit
+Field19: Job Shadow
+Field20: Internships
+Field21: Career Panel
+Field22: Networking Event
+Field116: 
+Field117: Fall 2022 (September 2022- December 2022)
+Field118: 
+Field119: 
+Field120: 
+Field216: Yes
+DateCreated: 2023-02-03 14:31:22
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
+EntryId: 6
+Field3: Dr.
+Field4: Grand
+Field5: Poobah
+Field218: Super Dude
+Field12: Kalel.com
+Field13: poobah@kalel.com
+Field14: 
+Field15: 1234567890
+Field16: Course Project
+Field17: 
+Field18: 
+Field19: Job Shadow
+Field20: 
+Field21: 
+Field22: 
+Field116: 
+Field117: 
+Field118: Spring 2023 (January 2023- April 2023)
+Field119: 
+Field120: 
+Field216: Yes
+DateCreated: 2023-02-03 15:12:42
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
