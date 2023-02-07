@@ -72,7 +72,7 @@ def create_db_cursor(db_connection_obj: sqlite3.Connection):
         return cursor_obj
 
 
-def create_table():
+def create_database():
     """Creates tables for database"""
     try:
         create_wufoo_db()
@@ -100,6 +100,45 @@ def save_data(data_to_save: list, save_file=None):
               file=save_file)
 
 
+def create_tables(cursor: sqlite3.Cursor, dictionary: dict):
+    """ This function creates each tables from the wufoo Database. """
+
+    for key in dictionary:
+        create_table_columns(cursor, key)
+
+
+def create_table_columns(cursor: sqlite3.Cursor, wufoo_data):
+    """ This function creates a table in the database to store ALL the wufoo data
+     (if it does not already exist) the parentheses following the table name,
+     contains a list of column names and the data type of values that will be inserted
+     into those columns """
+
+    create_wufoo_table = f'CREATE TABLE IF NOT EXISTS wufoo_data (' \
+                         f'Entry TEXT, ' \
+                         f'Prefix TEXT,' \
+                         f'First_Name TEXT,' \
+                         f'Last_Name TEXT,' \
+                         f'Title TEXT,' \
+                         f'rganization_Name TEXT,' \
+                         f'Email TEXT,' \
+                         f'Organization_Website TEXT,' \
+                         f'Phone_Number TEXT,' \
+                         f'Opportunities TEXT,' \
+                         f'Opportunities_2 TEXT,' \
+                         f'Opportunities_3 TEXT,' \
+                         f'Opportunities_4 TEXT,' \
+                         f'Opportunities_5 TEXT,' \
+                         f'Opportunities_6 TEXT,' \
+                         f'Opportunities_7 TEXT,' \
+                         f'Collaboration_Date TEXT,' \
+                         f'Collaboration_Date_2 TEXT,' \
+                         f'Collaboration_Date_3 TEXT,' \
+                         f'Collaboration_Date_4 TEXT,' \
+                         f'Collaboration_Date_5 TEXT,' \
+                         f'Participation TEXT);'
+    cursor.execute(create_wufoo_table)
+
+
 def create_wufoo_db():
     """Creates wufoo table in database"""
 
@@ -113,35 +152,14 @@ def create_wufoo_db():
         db_connection = create_db_connection()
         # Creates cursor object
         db_cursor_object = create_db_cursor(db_connection)
-        db_cursor_object.execute('''CREATE TABLE IF NOT EXISTS wufoo_data(
-                                    Entry TEXT,
-                                    Prefix TEXT,
-                                    First_Name TEXT,
-                                    Last_Name TEXT,
-                                    Title TEXT,
-                                    Organization_Name TEXT,
-                                    Email TEXT,
-                                    Organization_Website TEXT,
-                                    Phone_Number TEXT,
-                                    Opportunities TEXT,
-                                    Opportunities_2 TEXT,
-                                    Opportunities_3 TEXT,
-                                    Opportunities_4 TEXT,
-                                    Opportunities_5 TEXT,
-                                    Opportunities_6 TEXT,
-                                    Opportunities_7 TEXT,
-                                    Collaboration_Date TEXT,
-                                    Collaboration_Date_2 TEXT,
-                                    Collaboration_Date_3 TEXT,
-                                    Collaboration_Date_4 TEXT,
-                                    Collaboration_Date_5 TEXT,
-                                    Participation TEXT
-                                    );''')
+
+        create_tables(db_cursor_object, data1)
+
         # Clears table if data in it from previous use
         db_cursor_object.execute('DELETE FROM wufoo_data')
 
         for dict_entry in data1:
-            db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?, 
+            db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                                      (dict_entry.get('EntryId', None),
                                       dict_entry.get('Field3', None),
@@ -166,7 +184,7 @@ def create_wufoo_db():
                                       dict_entry.get('Field120', None),
                                       dict_entry.get('Field216', None)))
 
-            db_connection.commit()
+        db_connection.commit()
 
     except sqlite3.Error as db_error:
         print_red_text(f'A database error has occurred: {db_error}')
