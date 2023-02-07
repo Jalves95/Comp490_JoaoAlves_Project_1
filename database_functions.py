@@ -3,7 +3,7 @@ import json
 import requests
 from secrets import API_FOR_GET_REQUEST
 from requests.auth import HTTPBasicAuth
-import sys
+
 
 base_url = "https://joaoalves.wufoo.com/api/v3/forms/cubes-project-proposal-submission/entries/json"
 
