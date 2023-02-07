@@ -140,7 +140,7 @@ def create_table_columns(cursor: sqlite3.Cursor, wufoo_data):
 
 
 def create_wufoo_db():
-    """Creates wufoo table in database"""
+    """Creates wufoo table in database and puts data inside each collumn """
 
     data = safe_get_request()
     data1 = data['Entries']
