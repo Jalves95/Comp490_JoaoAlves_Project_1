@@ -3,30 +3,41 @@ import requests
 import sqlite3
 import database_functions
 from requests.auth import HTTPBasicAuth
-import secrets
+
 """ This file contains all unit tests """
 
 
-url = "https://joaoalves.wufoo.com/api/v3/forms/cubes-project-proposal-submission/entries/json"
-
-
-def get_wufoo_data() -> dict:
-    response = requests.get(url, auth=HTTPBasicAuth(secrets.API_FOR_GET_REQUEST, 'pass'))
-    if response.status_code != 200:  # if we don't get an ok response we have trouble
-        print(f"Failed to get data, response code:{response.status_code} and error message: {response.reason} ")
-    jsonresponse = response.json()
-    return jsonresponse
+sample_data = {'EntryId': '1', 'Field3': 'Mr.', 'Field4': 'John', 'Field5': 'Cable', 'Field218': 'IT',
+               'Field12': 'IT4US'}, \
+    {'EntryId': '2', 'Field3': 'Mrs.', 'Field4': 'Hella', 'Field5': 'Jones',
+     'Field218': 'Front Desk',
+     'Field12': 'IPOrganization'}, \
+    {'EntryId': '3', 'Field3': 'Mr.', 'Field4': 'James', 'Field5': 'Sousa', 'Field218': 'Manager',
+     'Field12': 'Walmart'}, \
+    {'EntryId': '4', 'Field3': 'Mrs.', 'Field4': 'Morgan', 'Field5': 'Tall', 'Field218': 'Student',
+     'Field12': 'BSU'}, \
+    {'EntryId': '5', 'Field3': 'Dr.', 'Field4': 'Matt', 'Field5': 'Alex', 'Field218': 'Professor',
+     'Field12': 'Computer Science'}, \
+    {'EntryId': '6', 'Field3': 'Dr.', 'Field4': 'Grand', 'Field5': 'Poobah', 'Field218': 'Super Dude',
+     'Field12': 'Kalel.com'}, \
+    {'EntryId': '7', 'Field3': 'Dr.', 'Field4': 'Tyler', 'Field5': 'Soares', 'Field218': 'President',
+     'Field12': 'Amazon'}, \
+    {'EntryId': '8', 'Field3': 'Dr.', 'Field4': 'Joao', 'Field5': 'All', 'Field218': 'Vice President',
+     'Field12': 'Facebook'}, \
+    {'EntryId': '9', 'Field3': 'Dr.', 'Field4': 'David', 'Field5': 'Roach', 'Field218': 'IT',
+     'Field12': 'Bestbuy'}, \
+    {'EntryId': '10', 'Field3': 'Dr.', 'Field4': 'Sean', 'Field5': 'Miley', 'Field218': 'Front Desk',
+     'Field12': 'Target'}
 
 
 @pytest.fixture
 def setup_database():
     """ Fixture to set up the in-memory database with test data """
-    data = get_wufoo_data()
-    data1 = data['Entries']
+    data = sample_data
 
     db_connection = sqlite3.connect(':memory:')
     db_cursor = database_functions.create_db_cursor(db_connection)
-    database_functions.create_tables(db_cursor, data1)
+    database_functions.create_tables(db_cursor, data)
 
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS wufoo_data(
                                     Entry TEXT,
@@ -51,23 +62,10 @@ def setup_database():
                                     Collaboration_Date_4 TEXT,
                                     Collaboration_Date_5 TEXT,
                                     Participation TEXT)''')
-    # sample_data = [
-    #     ('1', 'John', 'Maxwell', 'Internships', 'Yes'),
-    #     ('2', 'Tyler', 'Gordon', 'Internships', 'Yes'),
-    #     ('3', 'Jordan', 'Torres', 'Internships', 'Yes'),
-    #     ('4', 'Jaz', 'Souza', 'Internships', 'Yes'),
-    #     ('5', 'Jasmine', 'Morales', 'Internships', 'Yes'),
-    #     ('6', 'Deborah', 'Anderson', 'Internships', 'Yes'),
-    #     ('7', 'Jessica', 'James', 'Internships', 'Yes'),
-    #     ('8', 'Samantha', 'Adams', 'Internships', 'Yes'),
-    #     ('9', 'Joe', 'Tyler', 'Internships', 'Yes'),
-    #     ('10', 'Paul', ' Kim', 'Internships', 'Yes'),
-    # ]
 
     db_cursor.execute('DELETE FROM wufoo_data')
 
-
-    for dict_entry in data1:
+    for dict_entry in data:
         db_cursor.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                           (dict_entry.get('EntryId', None),
@@ -98,7 +96,4 @@ def setup_database():
 
 def test_connection(setup_database):
     # Test to make sure that there are 24 items in the database
-
-    db_cursor = setup_database
     assert len('SELECT * FROM wufoo_data') == 24
-
