@@ -3,8 +3,7 @@ import requests
 import sqlite3
 import database_functions
 from requests.auth import HTTPBasicAuth
-from secrets import API_FOR_GET_REQUEST
-
+import secrets
 """ This file contains all unit tests """
 
 
@@ -12,7 +11,7 @@ url = "https://joaoalves.wufoo.com/api/v3/forms/cubes-project-proposal-submissio
 
 
 def get_wufoo_data() -> dict:
-    response = requests.get(url, auth=HTTPBasicAuth(API_FOR_GET_REQUEST, 'pass'))
+    response = requests.get(url, auth=HTTPBasicAuth(secrets.API_FOR_GET_REQUEST, 'pass'))
     if response.status_code != 200:  # if we don't get an ok response we have trouble
         print(f"Failed to get data, response code:{response.status_code} and error message: {response.reason} ")
     jsonresponse = response.json()
