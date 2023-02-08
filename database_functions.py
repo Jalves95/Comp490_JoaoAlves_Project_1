@@ -1,5 +1,4 @@
 import sqlite3
-import json
 import requests
 import secrets
 from requests.auth import HTTPBasicAuth

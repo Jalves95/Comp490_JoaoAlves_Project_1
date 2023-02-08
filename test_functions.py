@@ -1,10 +1,8 @@
 import pytest
-import requests
 import sqlite3
 import database_functions
 
 """ This file contains all unit tests """
-
 
 # 10 manual data for testing
 sample_data = {'EntryId': '1', 'Field3': 'Mr.', 'Field4': 'John', 'Field5': 'Cable', 'Field218': 'IT',
@@ -36,10 +34,10 @@ def setup_database():
     data = sample_data
 
     db_connection = sqlite3.connect(':memory:')
-    db_cursor = database_functions.create_db_cursor(db_connection)
-    database_functions.create_tables(db_cursor, data)
+    cursor = database_functions.create_db_cursor(db_connection)
+    database_functions.create_tables(cursor, data)
 
-    db_cursor.execute('''CREATE TABLE IF NOT EXISTS wufoo_data(
+    cursor.execute('''CREATE TABLE IF NOT EXISTS test_data(
                                     Entry TEXT,
                                     Prefix TEXT,
                                     First_Name TEXT,
@@ -63,37 +61,46 @@ def setup_database():
                                     Collaboration_Date_5 TEXT,
                                     Participation TEXT)''')
 
-    db_cursor.execute('DELETE FROM wufoo_data')
+    cursor.execute('DELETE FROM test_data')
 
     for dict_entry in data:
-        db_cursor.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?,
+        cursor.execute('''INSERT INTO test_data VALUES(?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                          (dict_entry.get('EntryId', None),
-                           dict_entry.get('Field3', None),
-                           dict_entry.get('Field4', None),
-                           dict_entry.get('Field5', None),
-                           dict_entry.get('Field218', None),
-                           dict_entry.get('Field12', None),
-                           dict_entry.get('Field13', None),
-                           dict_entry.get('Field14', None),
-                           dict_entry.get('Field15', None),
-                           dict_entry.get('Field16', None),
-                           dict_entry.get('Field17', None),
-                           dict_entry.get('Field18', None),
-                           dict_entry.get('Field19', None),
-                           dict_entry.get('Field20', None),
-                           dict_entry.get('Field21', None),
-                           dict_entry.get('Field22', None),
-                           dict_entry.get('Field116', None),
-                           dict_entry.get('Field117', None),
-                           dict_entry.get('Field118', None),
-                           dict_entry.get('Field119', None),
-                           dict_entry.get('Field120', None),
-                           dict_entry.get('Field216', None)))
+                       (dict_entry.get('EntryId', None),
+                        dict_entry.get('Field3', None),
+                        dict_entry.get('Field4', None),
+                        dict_entry.get('Field5', None),
+                        dict_entry.get('Field218', None),
+                        dict_entry.get('Field12', None),
+                        dict_entry.get('Field13', None),
+                        dict_entry.get('Field14', None),
+                        dict_entry.get('Field15', None),
+                        dict_entry.get('Field16', None),
+                        dict_entry.get('Field17', None),
+                        dict_entry.get('Field18', None),
+                        dict_entry.get('Field19', None),
+                        dict_entry.get('Field20', None),
+                        dict_entry.get('Field21', None),
+                        dict_entry.get('Field22', None),
+                        dict_entry.get('Field116', None),
+                        dict_entry.get('Field117', None),
+                        dict_entry.get('Field118', None),
+                        dict_entry.get('Field119', None),
+                        dict_entry.get('Field120', None),
+                        dict_entry.get('Field216', None)))
 
     db_connection.commit()
 
 
-def test_connection(setup_database):
+def test_database(setup_database):
     # Test to make sure that there are 24 items in the database
     assert len('SELECT * FROM wufoo_data') == 24
+
+
+def test_entries():
+    with pytest.raises(ValueError) as exception_info:
+        assert dict(sample_data) is ValueError
+
+    with pytest.raises(AssertionError) as exception_info:
+        assert str(sample_data) is AssertionError
+
