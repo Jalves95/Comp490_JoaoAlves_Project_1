@@ -2,11 +2,11 @@ import pytest
 import requests
 import sqlite3
 import database_functions
-from requests.auth import HTTPBasicAuth
 
 """ This file contains all unit tests """
 
 
+# 10 manual data for testing
 sample_data = {'EntryId': '1', 'Field3': 'Mr.', 'Field4': 'John', 'Field5': 'Cable', 'Field218': 'IT',
                'Field12': 'IT4US'}, \
     {'EntryId': '2', 'Field3': 'Mrs.', 'Field4': 'Hella', 'Field5': 'Jones',
