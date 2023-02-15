@@ -1,6 +1,7 @@
 import pytest
 import sqlite3
 import database_functions
+import getData
 
 """ This file contains all unit tests """
 
@@ -90,6 +91,15 @@ def setup_database():
                         dict_entry.get('Field216', None)))
 
     db_connection.commit()
+
+
+def test_database_functions():
+    """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
+        Since there are currently 8 entries, this test will pass.
+        Provided by Dr. Santore """
+    json_data = getData.safe_get_request()
+    entries = json_data['Entries']
+    assert len(entries) <= 10
 
 
 def test_database(setup_database):

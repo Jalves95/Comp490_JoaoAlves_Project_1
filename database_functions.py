@@ -85,18 +85,18 @@ def create_table_columns(cursor: sqlite3.Cursor, wufoo_data):
                          f'Email TEXT,' \
                          f'Organization_Website TEXT,' \
                          f'Phone_Number TEXT,' \
-                         f'Opportunities TEXT,' \
-                         f'Opportunities_2 TEXT,' \
-                         f'Opportunities_3 TEXT,' \
-                         f'Opportunities_4 TEXT,' \
-                         f'Opportunities_5 TEXT,' \
-                         f'Opportunities_6 TEXT,' \
-                         f'Opportunities_7 TEXT,' \
-                         f'Collaboration_Date TEXT,' \
-                         f'Collaboration_Date_2 TEXT,' \
-                         f'Collaboration_Date_3 TEXT,' \
-                         f'Collaboration_Date_4 TEXT,' \
-                         f'Collaboration_Date_5 TEXT,' \
+                         f'Course_Project TEXT,' \
+                         f'Guest_Speaker TEXT,' \
+                         f'Site_Visit TEXT,' \
+                         f'Job_Shadow TEXT,' \
+                         f'Internships TEXT,' \
+                         f'Career_Panel TEXT,' \
+                         f'Networking_Event TEXT,' \
+                         f'Summer_2022 TEXT,' \
+                         f'Fall_2022 TEXT,' \
+                         f'Spring_2023 TEXT,' \
+                         f'Summer_2023 TEXT,' \
+                         f'OTHER TEXT,' \
                          f'Participation TEXT);'
     cursor.execute(create_wufoo_table)
 
