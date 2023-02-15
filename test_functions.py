@@ -93,7 +93,7 @@ def setup_database():
     db_connection.commit()
 
 
-def test_database_functions():
+def test_get_data():
     """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
         Since there are currently 8 entries, this test will pass.
         Provided by Dr. Santore """
