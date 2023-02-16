@@ -1,5 +1,7 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QListWidget, QLineEdit, QLabel, QCheckBox
+import PySide6
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, \
+    QListWidget, QLineEdit, QLabel, QCheckBox
 from PySide6.QtGui import QCloseEvent
 
 
@@ -12,13 +14,13 @@ class GuiWindow(QWidget):
         self.setup()
 
     def setup(self):
-        self.setGeometry(25, 50, 750, 700)
+        self.setGeometry(25, 50, 790, 650)
         self.setWindowTitle('Wufoo Data')
 
         btn_quit = QPushButton('Quit', self)
         btn_quit.clicked.connect(QApplication.instance().quit)
         btn_quit.resize(btn_quit.sizeHint())
-        btn_quit.move(630, 650)
+        btn_quit.move(575, 575)
 
         display_list = QListWidget(self)
         self.list_control = display_list
@@ -66,35 +68,35 @@ class GuiWindow(QWidget):
 
         checkbox = QCheckBox("Course_Project", self)
         checkbox.move(310, 200)
-
         checkbox = QCheckBox("Guest Speaker", self)
         checkbox.move(310, 230)
-
         checkbox = QCheckBox("Site Visit", self)
         checkbox.move(310, 260)
-
         checkbox = QCheckBox("Job Shadow", self)
         checkbox.move(310, 290)
-
         checkbox = QCheckBox("Internship", self)
         checkbox.move(310, 320)
-
         checkbox = QCheckBox("Career Panel", self)
         checkbox.move(310, 350)
-
         checkbox = QCheckBox("Networking Event", self)
         checkbox.move(310, 380)
-
-        checkbox = QCheckBox("Summer 2022", self)
+        checkbox = QCheckBox("Summer 2022 (June 2022- August 2022)", self)
         checkbox.move(520, 200)
-        checkbox = QCheckBox("Fall 2022", self)
+        checkbox = QCheckBox("Fall 2022 (September 2022- December 2022)", self)
         checkbox.move(520, 230)
-        checkbox = QCheckBox("Spring 2023", self)
+        checkbox = QCheckBox("Spring 2023 (January 2023- April 2023)", self)
         checkbox.move(520, 260)
-        checkbox = QCheckBox("Summer 2023", self)
+        checkbox = QCheckBox("Summer 2023 (June 2023- August 2023)", self)
         checkbox.move(520, 290)
         checkbox = QCheckBox("Other", self)
         checkbox.move(520, 320)
+        # checkbox = QCheckBox("Participation", self)
+        # checkbox.move(520, 380)
+
+        label = QLabel("Participation:", self)
+        label.move(520, 380)
+        prefix_display = QLineEdit(self)
+        prefix_display.move(600, 380)
 
         self.show()
 
@@ -109,10 +111,8 @@ class GuiWindow(QWidget):
 
 
 def run():
-    app = QApplication(sys.argv)
-
-    ex = GuiWindow()
-
+    app = PySide6.QtWidgets.QApplication(sys.argv)
+    my_window = GuiWindow()
     sys.exit(app.exec())
 
 
