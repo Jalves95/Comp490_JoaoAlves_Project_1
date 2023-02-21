@@ -1,3 +1,4 @@
+import numbers
 import sys
 import PySide6.QtWidgets
 import PySide6
@@ -26,7 +27,19 @@ def get_test_data() -> list[dict]:
         prefix = current_row[1]
         first_name = current_row[2]
         last_name = current_row[3]
-        record = {"Entry": entry_collumn, "Prefix": prefix, "First_Name": first_name, "Last_Name": last_name}
+        title = current_row[4]
+        org_name = current_row[5]
+        org_web = current_row[7]
+        email = current_row[6]
+        phone_number = current_row[8]
+        crs_pro = current_row[9]
+        participation = current_row[21]
+        record = {"Entry": entry_collumn, "Prefix": prefix, "First_Name": first_name, "Last_Name": last_name,
+                  "Title": title, "Phone_Number": phone_number, "Organization_Name": org_name,
+                  "Organization_Website": org_web, "Email": email, "Participation": participation,
+                  "Course_Project": crs_pro}
+        if current_row in rawdata is None:
+            record = "No Entry"
         final_data_list.append(record)
     return final_data_list
 
