@@ -1,17 +1,20 @@
 import sys
 import PySide6
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, \
-    QListWidget, QLineEdit, QLabel, QCheckBox
+    QListWidget, QLineEdit, QLabel, QCheckBox, QListWidgetItem
 from PySide6.QtGui import QCloseEvent
+
+import getData
 
 
 class GuiWindow(QWidget):
-    def __init__(self):
+    def __init__(self, data_to_show):
         super().__init__()
         self.list_control = None
         self.list_control2 = None
-
+        self.data = data_to_show
         self.setup()
+        self.data_window = None
 
     def setup(self):
         self.setGeometry(25, 50, 790, 650)
@@ -24,24 +27,26 @@ class GuiWindow(QWidget):
 
         display_list = QListWidget(self)
         self.list_control = display_list
+        self.put_data_in_list(self.data)
         display_list.resize(300, 600)
+        # display_list.currentItemChanged.connect(self.demo_list_item_selected)
 
         label = QLabel("Prefix:", self)
         label.move(310, 0)
         prefix_display = QLineEdit(self)
         prefix_display.move(375, 0)
 
-        label = QLabel("First_Name:", self)
+        label = QLabel("First Name:", self)
         label.move(310, 50)
         first_name_display = QLineEdit(self)
         first_name_display.move(375, 50)
 
-        label = QLabel("Last_Name:", self)
+        label = QLabel("Last Name:", self)
         label.move(310, 100)
         title_display = QLineEdit(self)
         title_display.move(375, 100)
 
-        label = QLabel("Phone_Number:", self)
+        label = QLabel("Phone Number:", self)
         label.move(310, 150)
         title_display = QLineEdit(self)
         title_display.move(400, 150)
@@ -51,12 +56,12 @@ class GuiWindow(QWidget):
         org_display = QLineEdit(self)
         org_display.move(600, 0)
 
-        label = QLabel("Org_Name:", self)
+        label = QLabel("Org Name:", self)
         label.move(520, 50)
         email_display = QLineEdit(self)
         email_display.move(600, 50)
 
-        label = QLabel("Org_Website:", self)
+        label = QLabel("Org Website:", self)
         label.move(520, 100)
         last_name_display = QLineEdit(self)
         last_name_display.move(600, 100)
@@ -100,21 +105,42 @@ class GuiWindow(QWidget):
 
         self.show()
 
+    # def put_data_in_list(self, data: list[dict]):
+    #     for item in data:
+    #         display_text = f"{item[0]}"
+    #         list_item = QListWidgetItem(display_text, listview=self.list_control)
+    def put_data_in_list(self, data: list[dict]):
+        for item in data:
+            display_text = f"{item['Entry']}\t{item['Prefix']}\t{item['First_Name']}\t{item['Last_Name']}"
+            list_item = QListWidgetItem(display_text, listview=self.list_control)
+
+    # def find_full_data_record(self, stateName:str):
+    #     for state_record in self.data:
+    #         if state_record["state_name"] == stateName:
+    #             return state_record
+
+    # def demo_list_item_selected(self, current:QListWidgetItem, previous:QListWidgetItem):
+    #     selected_data = current.data(0)  # the data function has a 'role' choose 0 unless you extended QListWidgetItem
+    #     state_name = selected_data.split("\t")[0]  # split on tab and take the first resulting entry
+    #     # full_record = self.find_full_data_record(state_name)
+    #     # print(full_record)
+    #     # self.data_window = GuiWindow(full_record)
+    #     self.data_window.show()
+
     def closeEvent(self, event: QCloseEvent):
         reply = QMessageBox.question(self, 'Message', 'Are you sure you want to quit?',
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
         if reply == QMessageBox.Yes:
             event.accept()
         else:
             event.ignore()
 
 
-def run():
-    app = PySide6.QtWidgets.QApplication(sys.argv)
-    my_window = GuiWindow()
-    sys.exit(app.exec())
+# def run():
+#     app = PySide6.QtWidgets.QApplication(sys.argv)
+#     my_window = GuiWindow(getData.safe_get_request())
+#     sys.exit(app.exec())
 
-
-if __name__ == '__main__':
-    run()
+#
+# if __name__ == '__main__':
+#     run()
