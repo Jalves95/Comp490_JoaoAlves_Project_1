@@ -95,9 +95,6 @@ class GuiWindow(QWidget):
         checkbox.move(520, 290)
         checkbox = QCheckBox("Other", self)
         checkbox.move(520, 320)
-        # checkbox = QCheckBox("Participation", self)
-        # checkbox.move(520, 380)
-
         label = QLabel("Participation:", self)
         label.move(520, 380)
         prefix_display = QLineEdit(self)
@@ -105,10 +102,6 @@ class GuiWindow(QWidget):
 
         self.show()
 
-    # def put_data_in_list(self, data: list[dict]):
-    #     for item in data:
-    #         display_text = f"{item[0]}"
-    #         list_item = QListWidgetItem(display_text, listview=self.list_control)
     def put_data_in_list(self, data: list[dict]):
         for item in data:
             display_text = f"{item['Entry']}\t{item['Prefix']}\t{item['First_Name']}\t{item['Last_Name']}"
@@ -134,13 +127,3 @@ class GuiWindow(QWidget):
             event.accept()
         else:
             event.ignore()
-
-
-# def run():
-#     app = PySide6.QtWidgets.QApplication(sys.argv)
-#     my_window = GuiWindow(getData.safe_get_request())
-#     sys.exit(app.exec())
-
-#
-# if __name__ == '__main__':
-#     run()

@@ -43,16 +43,10 @@ def save_data(data_to_save: list, save_file=None):
               file=save_file)
 
 
-# def print_data():
-#     data = safe_get_request()
-#     data1 = data['Entries']
-#     file_to_save = open("data_output.txt", 'w')
-#     save_data(data1, save_file=file_to_save)
-#     print(data1)
-
-data = safe_get_request()
-data1 = data['Entries']
-file_to_save = open("data_output.txt", 'w')
-save_data(data1, save_file=file_to_save)
-print(data1)
+def print_data():
+    data = safe_get_request()
+    data1 = data['Entries']
+    file_to_save = open("data_output.txt", 'w')
+    save_data(data1, save_file=file_to_save)
+    print(data1)
 

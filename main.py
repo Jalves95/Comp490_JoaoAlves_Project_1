@@ -37,8 +37,6 @@ def get_test_data() -> list[dict]:
 
 def main():
     # database_functions.create_wufoo_db()
-    # gui_window.run()
-    # getData.print_data()
     test_data = get_test_data()
     # test_data.sort(key=get_key)
     display_data(test_data)

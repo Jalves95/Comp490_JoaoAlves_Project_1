@@ -108,7 +108,7 @@ def create_wufoo_db():
     data1 = data['Entries']
     file_to_save = open("data_output.txt", 'w')
     save_data(data1, save_file=file_to_save)
-    print(data1)
+    # print(data1)
 
     try:
         # Creates database connection
