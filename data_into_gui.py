@@ -54,7 +54,7 @@ def get_test_data() -> list[dict]:
     return final_data_list
 
 
-def main():
+def run_data_gui():
     test_data = get_test_data()
     display_data(test_data)
 
