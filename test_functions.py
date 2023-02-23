@@ -97,8 +97,9 @@ def test_get_data():
     """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
         Since there are currently 8 entries, this test will pass.
         Provided by Dr. Santore """
+
     json_data = getData.safe_get_request()
-    entries = json_data['Entries']
+    entries = json_data['Entry']
     assert len(entries) <= 10
 
 
