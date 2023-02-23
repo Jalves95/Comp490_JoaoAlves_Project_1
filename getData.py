@@ -18,7 +18,6 @@ def safe_get_request() -> dict:
     response = requests.get(base_url, auth=HTTPBasicAuth(secrets.API_FOR_GET_REQUEST, 'pass'))
     try:
         # if request.get() throws an exception, the 'response' variable will remain as 'None'
-        response = requests.get(base_url, auth=HTTPBasicAuth(secrets.API_FOR_GET_REQUEST, 'pass'))
         if response.status_code != 200:  # if we don't get an ok response we have trouble
             print_red_text(f"Failed to get data, response code:{response.status_code} and error message:"
                            f" {response.reason} ")
