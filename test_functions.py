@@ -1,10 +1,7 @@
 import pytest
 import sqlite3
 import database_functions
-import getData
-import second_gui_window
-import gui_window
-import data_into_gui
+
 
 """ This file contains all unit tests """
 
