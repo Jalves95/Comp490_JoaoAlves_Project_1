@@ -2,7 +2,6 @@ import pytest
 import sqlite3
 import database_functions
 import getData
-from project.apps.app1.tests import *
 
 """ This file contains all unit tests """
 
