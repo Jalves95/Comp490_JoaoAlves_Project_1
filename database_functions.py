@@ -1,5 +1,5 @@
 import sqlite3
-from getData import get_wufoo_data, save_data
+from getData import safe_get_request, save_data
 
 
 def print_red_text(text_str: str):
@@ -104,7 +104,7 @@ def create_table_columns(cursor: sqlite3.Cursor, wufoo_data):
 def create_wufoo_db():
     """Creates wufoo table in database and puts data inside each collumn """
 
-    data = get_wufoo_data()
+    data = safe_get_request()
     data1 = data['Entries']
     file_to_save = open("data_output.txt", 'w')
     save_data(data1, save_file=file_to_save)
