@@ -15,7 +15,7 @@ def safe_get_request() -> dict:
     """ This function makes a Get request to the URL passed in as its single parameter.
     If an exception is thrown while trying to execute the GET request, 'None' is returned
     in place of a response object. If the GET request is successful, a response object is returned. """
-
+    response = requests.get(base_url, auth=HTTPBasicAuth(secrets.API_FOR_GET_REQUEST, 'pass'))
     try:
         # if request.get() throws an exception, the 'response' variable will remain as 'None'
         response = requests.get(base_url, auth=HTTPBasicAuth(secrets.API_FOR_GET_REQUEST, 'pass'))
@@ -27,7 +27,6 @@ def safe_get_request() -> dict:
     except requests.exceptions.RequestException as requests_exception:
         print_red_text(f'GET requests FAILED with the following error: {requests_exception}\n')
     finally:
-        print(f'The Get request was successful \n{response.status_code}[{response.reason}]\n')
         json_response = response.json()
         return json_response
 
