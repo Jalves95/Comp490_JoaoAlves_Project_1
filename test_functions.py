@@ -98,9 +98,20 @@ def test_get_data():
         Since there are currently 8 entries, this test will pass.
         Provided by Dr. Santore """
 
-    json_data = getData.safe_get_request()
-    entries = json_data['Entry']
+    json_data = getData.get_wufoo_data()
+    entries = json_data['Entries']
     assert len(entries) <= 10
+
+#
+# def test_table_created():
+#     """There were several ways to do this, some of them include wrapping inserts in try/except blocks,
+#     but I took an easy way and just check to make sure my table is in the meta table sqlite_master"""
+#     connection, cursor = database_functions.create_db_cursor(":memory:")
+#     database_functions.create_table_columns(cursor,None)
+#     cursor.execute("SELECT Count() FROM SQLITE_MASTER WHERE name = ?", ["wufoo_data"])
+#     record = cursor.fetchone()
+#     number_of_rows = record[0]  # the number is the first )and only) item in the tuple
+#     assert number_of_rows == 1
 
 
 def test_database(setup_database):
