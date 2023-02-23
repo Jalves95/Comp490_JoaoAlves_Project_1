@@ -2,6 +2,7 @@ import pytest
 import sqlite3
 import database_functions
 import getData
+from project.apps.app1.tests import *
 
 """ This file contains all unit tests """
 
@@ -95,7 +96,7 @@ def setup_database():
 
 def test_get_data():
     """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
-        Since there are currently 8 entries, this test will pass.
+        Since there are currently 10 entries, this test will pass.
         Provided by Dr. Santore """
 
     json_data = getData.get_wufoo_data()
