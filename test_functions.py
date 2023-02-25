@@ -3,7 +3,7 @@ import sqlite3
 import database_functions
 import getData
 import data_into_gui
-
+import PySide6.QtWidgets
 
 """ This file contains all unit tests """
 
@@ -128,7 +128,7 @@ def test_data_into_gui():
 
     all_records = cursor.fetchall()
     for current_row in all_records:
-        assert all_records == 21
+        assert current_row == 22
 
 
 # def test_second_gui_window():
