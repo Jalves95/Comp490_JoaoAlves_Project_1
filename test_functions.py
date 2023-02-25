@@ -131,7 +131,7 @@ def test_data_into_gui():
         assert current_row == 22
 
 
-def test_second_gui_window():
+# def test_second_gui_window():
 
 
 # def test_create_wufoo_db():
