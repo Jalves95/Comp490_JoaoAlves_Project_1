@@ -127,13 +127,11 @@ def test_data_into_gui():
     assert number_of_rows == 1
 
     all_records = cursor.fetchall()
-    for current_row in all_records:
-        assert current_row == 22
+    for data in all_records:
+        assert data == 22
+        assert data == all_records
+        assert data == one_record
 
 
-# def test_second_gui_window():
-
-
-# def test_create_wufoo_db():
 
 

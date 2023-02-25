@@ -15,7 +15,7 @@ def get_test_data() -> list[dict]:
     workbook_file = database_functions.create_wufoo_db()
     cnn = database_functions.create_db_connection()
     cursor = cnn.cursor()
-    cursor.execute("select * from wufoo_data")  # DataTable is a table in Data.mdb
+    cursor.execute("select * from wufoo_data")
     rawdata = cursor.fetchall()
     final_data_list = []
     for current_row in rawdata:
