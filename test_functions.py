@@ -3,7 +3,7 @@ import sqlite3
 import database_functions
 import getData
 import data_into_gui
-import PySide6.QtWidgets
+
 
 """ This file contains all unit tests """
 
@@ -95,14 +95,14 @@ def setup_database():
     db_connection.commit()
 
 
-# def test_safe_get_request():
-#     """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
-#         Since there are currently 10 entries, this test will pass.
-#         Provided by Dr. Santore """
-#
-#     json_data = getData.safe_get_request()
-#     entries = json_data['Entries']
-#     assert len(entries) <= 10
+def test_safe_get_request():
+    """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
+        Since there are currently 10 entries, this test will pass.
+        Provided by Dr. Santore """
+
+    json_data = getData.safe_get_request()
+    entries = json_data['Entries']
+    assert len(entries) <= 10
 
 
 def test_database(setup_database):
@@ -131,7 +131,8 @@ def test_data_into_gui():
         assert current_row == 22
 
 
-# def test_second_gui_window():
+def test_second_gui_window():
+
 
 # def test_create_wufoo_db():
 
