@@ -122,7 +122,7 @@ def test_data_into_gui():
     connection = database_functions.create_db_connection()
     cursor = database_functions.create_db_cursor(connection)
     cursor.execute("SELECT Count() FROM SQLITE_MASTER WHERE name = ?", ["wufoo_data"])
-    one_record = cursor.fetchall()
+    one_record = cursor.fetchone()
     number_of_rows = one_record[0]
     assert number_of_rows <= 1
 
