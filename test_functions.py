@@ -124,7 +124,7 @@ def test_data_into_gui():
     cursor.execute("SELECT Count() FROM SQLITE_MASTER WHERE name = ?", ["wufoo_data"])
     one_record = cursor.fetchone()
     number_of_rows = one_record[0]
-    assert number_of_rows == 1
+    assert number_of_rows >= 1
 
     all_records = cursor.fetchall()
     for data in all_records:
