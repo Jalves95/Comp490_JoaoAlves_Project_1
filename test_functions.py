@@ -105,7 +105,7 @@ def test_safe_get_request():
     assert len(entries) <= 10
 
 
-def test_database(setup_database):
+def test_database(test_setup_database):
     # Test to make sure that there are 24 items in the database
     assert len('SELECT * FROM wufoo_data') == 24
 
