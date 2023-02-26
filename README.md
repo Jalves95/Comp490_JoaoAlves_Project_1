@@ -13,7 +13,7 @@ program, there is now a Graphical User Interface (GUI) that will show all the da
 is able to select any wufoo entry and another GUI will show all the corresponding data to that entry.
 4. My database has 22 columns with each of them containing data from each Wufoo entries.
 5. Everything works as intended, all test passes through the command line. 
-Git Actions fails the pytest for some unknown reason, everything else passes.
+All tests for Git Actions pass.
 6. Wufoo Link: https://joaoalves.wufoo.com/forms/cubes-project-proposal-submission
 
 
