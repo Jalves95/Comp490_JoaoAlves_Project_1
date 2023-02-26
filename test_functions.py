@@ -32,7 +32,7 @@ sample_data = {'EntryId': '1', 'Field3': 'Mr.', 'Field4': 'John', 'Field5': 'Cab
 
 
 @pytest.fixture
-def setup_database():
+def test_setup_database():
     """ Fixture to set up the in-memory database with test data """
     data = sample_data
 
