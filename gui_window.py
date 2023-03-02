@@ -13,8 +13,6 @@ class GuiWindow(QWidget):
         self.data_window = None
 
     def setup(self):
-        self.setWindowTitle('Wufoo Data')
-
         display_list = QListWidget(self)
         self.list_control = display_list
         self.put_data_in_list(self.data)

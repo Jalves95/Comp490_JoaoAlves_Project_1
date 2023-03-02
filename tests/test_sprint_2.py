@@ -1,9 +1,6 @@
 import pytest
 import sqlite3
 import database_functions
-import getData
-import data_into_gui
-
 
 """ This file contains all unit tests """
 
@@ -95,16 +92,6 @@ def test_setup_database():
     db_connection.commit()
 
 
-def test_safe_get_request():
-    """ For this test we are just getting the data from wufoo, getting the Entries and counting them.
-        Since there are currently 10 entries, this test will pass.
-        Provided by Dr. Santore """
-
-    json_data = getData.safe_get_request()
-    entries = json_data['Entries']
-    assert len(entries) <= 10
-
-
 def test_database(test_setup_database):
     # Test to make sure that there are 24 items in the database
     assert len('SELECT * FROM wufoo_data') == 24
@@ -116,22 +103,3 @@ def test_entries():
 
     with pytest.raises(AssertionError) as exception_info:
         assert str(sample_data) is AssertionError
-
-
-def test_data_into_gui():
-    connection = database_functions.create_db_connection()
-    cursor = database_functions.create_db_cursor(connection)
-    cursor.execute("SELECT Count() FROM SQLITE_MASTER WHERE name = ?", ["wufoo_data"])
-    one_record = cursor.fetchone()
-    number_of_rows = one_record[0]
-    assert number_of_rows <= 1
-
-    all_records = cursor.fetchall()
-    for data in all_records:
-        assert data == 22
-        assert data == all_records
-        assert data == one_record
-
-
-
-

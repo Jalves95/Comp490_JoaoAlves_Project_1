@@ -6,9 +6,13 @@ import gui_window
 
 
 def display_data(data: list):
-    qt_app = PySide6.QtWidgets.QApplication(sys.argv)  # sys.argv is the list of command line arguments
-    my_window = gui_window.GuiWindow(data)
-    sys.exit(qt_app.exec())
+    if not PySide6.QtWidgets.QApplication.instance():
+        qt_app = PySide6.QtWidgets.QApplication(sys.argv)  # sys.argv is the list of command line arguments
+        my_window = gui_window.GuiWindow(data)
+        my_window.setWindowTitle('Wufoo Data')
+        sys.exit(qt_app.exec())
+    else:
+        qt_app = PySide6.QtWidgets.QApplication.instance()
 
 
 def get_test_data() -> list[dict]:
