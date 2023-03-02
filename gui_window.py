@@ -34,6 +34,7 @@ class GuiWindow(QWidget):
         for item in data:
             display_text = f"{item['Entry']}\t{item['Prefix']}\t{item['First_Name']}\t{item['Last_Name']}"
             list_item = QListWidgetItem(display_text, listview=self.list_control)
+            list_item.setData(1, item)  # lets put the dictionary for later use
 
     def find_full_data_record(self, entry: str):
         """ Provided from Dr. Santore's GUI DEMO

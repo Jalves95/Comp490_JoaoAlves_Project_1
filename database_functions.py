@@ -1,5 +1,5 @@
 import sqlite3
-from getData import safe_get_request, save_data
+from get_data import safe_get_request, save_data
 
 
 def print_red_text(text_str: str):
