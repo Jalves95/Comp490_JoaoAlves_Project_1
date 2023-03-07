@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, \
     QListWidget, QLineEdit, QLabel, QCheckBox, QListWidgetItem
 from PySide6.QtGui import QCloseEvent
 import second_gui_window
+import user_record_gui
 
 
 class GuiWindow(QWidget):
@@ -13,17 +14,24 @@ class GuiWindow(QWidget):
         self.data_window = None
 
     def setup(self):
-        display_list = QListWidget(self)
-        self.list_control = display_list
-        self.put_data_in_list(self.data)
-        display_list.resize(300, 450)
-        display_list.currentItemChanged.connect(self.demo_list_item_selected)
-        self.setGeometry(25, 50, 300, 500)
+        self.setGeometry(25, 50, 315, 500)
 
         btn_quit = QPushButton('Quit', self)
         btn_quit.clicked.connect(QApplication.instance().quit)
         btn_quit.resize(btn_quit.sizeHint())
-        btn_quit.move(115, 465)
+        btn_quit.move(200, 465)
+
+        display_list = QListWidget(self)
+        self.list_control = display_list
+        self.put_data_in_list(self.data)
+        display_list.resize(315, 450)
+        display_list.currentItemChanged.connect(self.demo_list_item_selected)
+        # display_list.currentItemChanged.connect(self.demo_list_item_selected2)
+
+        btn_claim = QPushButton('Claim Entry', self)
+        btn_claim.clicked.connect(self.demo_user_record)
+        btn_claim.resize(btn_claim.sizeHint())
+        btn_claim.move(40, 465)
 
         self.show()
 
@@ -54,10 +62,26 @@ class GuiWindow(QWidget):
         # print(full_record)
         self.data_window = second_gui_window.GuiWindow2(full_record)
         self.data_window.show()
+        # self.data_window_2 = user_record_gui.UserGui(full_record)
+        # self.data_window_2.show()
+
+    def demo_user_record(self, event: QCloseEvent):
+        """ Provided from Dr. Santore's GUI DEMO
+            Modified for my Project 1 Sprint 3 """
+
+        reply = QMessageBox.question(self, 'Message', 'You want to claim this entry?',
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            full_record = self.find_full_data_record(str(0))
+            print(full_record)
+            self.data_window = user_record_gui.UserGui(full_record)
+            self.data_window.show()
+        else:
+            event.ignore()
 
     def closeEvent(self, event: QCloseEvent):
         reply = QMessageBox.question(self, 'Message', 'Are you sure you want to quit?',
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                                     QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             event.accept()
         else:

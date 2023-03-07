@@ -1,16 +1,32 @@
+import PySide6
 from PySide6.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QTextEdit, QMessageBox, QCheckBox
 from PySide6.QtCore import Qt
-
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtWidgets import (
+    QWidget,
+    QPushButton,
+    QListWidget,
+    QApplication,
+    QListWidgetItem,
+    QHBoxLayout,
+    QVBoxLayout,
+    QLayout,
+    QGridLayout,
+    QPlainTextEdit,
+    QLabel,
+    QLineEdit,
+    QCheckBox,
+)
 
 class GuiWindow2(QWidget):
 
-    def __init__(self, data_to_show:dict):
+    def __init__(self, data_to_show: dict):
         super().__init__()
         self.data = data_to_show
         self.setup_window()
 
     def setup_window(self):
-        self.setGeometry(330, 50, 525, 500)
+        self.setGeometry(341, 50, 525, 500)
         self.setWindowTitle('Selected Entry Data')
 
         label = QLabel("Prefix:", self)

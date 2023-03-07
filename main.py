@@ -1,6 +1,7 @@
 import database_functions
 import put_data_into_gui
 import sys
+import user_record_gui
 
 
 def show_options():
