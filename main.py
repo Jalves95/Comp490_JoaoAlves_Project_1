@@ -1,5 +1,5 @@
 import database_functions
-import data_into_gui
+import put_data_into_gui
 import sys
 
 
@@ -21,7 +21,7 @@ def main():
             database_functions.create_wufoo_db()
             break
         elif answer == "2":
-            data_into_gui.run_data_gui()
+            put_data_into_gui.run_data_gui()
             break
         elif answer == "3":
             sys.exit(0)

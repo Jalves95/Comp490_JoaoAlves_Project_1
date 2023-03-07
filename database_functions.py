@@ -57,7 +57,7 @@ def create_database():
 
 def create_db_connection():
     """Creates database connection and returns that connection"""
-    db_name = 'wufoo_data.db'
+    db_name = 'cubes_project.db'
     db_connection = establish_database_connection(db_name)
     return db_connection
 
@@ -66,10 +66,11 @@ def create_tables(cursor: sqlite3.Cursor, dictionary: dict):
     """ This function creates each tables from the wufoo Database. """
 
     for key in dictionary:
-        create_table_columns(cursor, key)
+        create_wufoo_columns(cursor, key)
+        create_user_columns(cursor, key)
 
 
-def create_table_columns(cursor: sqlite3.Cursor, wufoo_data):
+def create_wufoo_columns(cursor: sqlite3.Cursor, wufoo_data):
     """ This function creates a table in the database to store ALL the wufoo data
      (if it does not already exist) the parentheses following the table name,
      contains a list of column names and the data type of values that will be inserted
@@ -98,7 +99,24 @@ def create_table_columns(cursor: sqlite3.Cursor, wufoo_data):
                          f'Summer_2023 TEXT,' \
                          f'OTHER TEXT,' \
                          f'Participation TEXT);'
+
     cursor.execute(create_wufoo_table)
+
+
+def create_user_columns(cursor: sqlite3.Cursor, user_records):
+    """ This function creates a table in the database to store ALL the User records
+     (if it does not already exist) the parentheses following the table name,
+     contains a list of column names and the data type of values that will be inserted
+     into those columns """
+
+    create_user_table = f'CREATE TABLE IF NOT EXISTS user_records (' \
+                        f'BSU_Email TEXT,' \
+                        f'First_Name TEXT,' \
+                        f'Last_Name TEXT,' \
+                        f'Title TEXT,' \
+                        f'Department TEXT);'
+
+    cursor.execute(create_user_table)
 
 
 def create_wufoo_db():
@@ -120,6 +138,7 @@ def create_wufoo_db():
 
         # Clears table if data in it from previous use
         db_cursor_object.execute('DELETE FROM wufoo_data')
+        db_cursor_object.execute('DELETE FROM user_records')
 
         for dict_entry in data1:
             db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?,
