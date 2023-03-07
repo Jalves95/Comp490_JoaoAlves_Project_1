@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QTextEdit
 from PySide6.QtWidgets import QWidget
 import database_functions
 import get_data
-import data_into_gui
+import put_data_into_gui
 from PySide6 import QtCore, QtWidgets
 import gui_window
 import second_gui_window
@@ -41,7 +41,7 @@ def test_entry_selected(qtbot):  # using qubot requires the pytest-qt plugin (I 
     https://stackoverflow.com/questions/58136462/selecting-qlistwidgetitem-with-qtbot-mouseclick
     and
     https://pytest-qt.readthedocs.io/en/latest/tutorial.html"""
-    data = data_into_gui.get_test_data()
+    data = put_data_into_gui.get_test_data()
     window = gui_window.GuiWindow(data)
     window.show()
     qtbot.addWidget(window)
