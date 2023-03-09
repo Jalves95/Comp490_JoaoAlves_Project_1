@@ -15,7 +15,7 @@ from PySide6.QtWidgets import (
 class UserGui(QWidget):
 
     def save_input(self):
-        with open("User_Records.txt", "w") as CurrentFile:
+        with open("user_records.txt", "w") as CurrentFile:
             print(CurrentFile)
             text = self.bsu_email.text()
             text_2 = self.first_name.text()

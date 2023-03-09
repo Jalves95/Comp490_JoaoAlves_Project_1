@@ -122,21 +122,22 @@ def create_user_columns(cursor: sqlite3.Cursor, user_records):
 def create_user_db():
     db_connection = create_db_connection()
     db_cursor_object = create_db_cursor(db_connection)
-    user_info = {"BSU_Email": 'gmail',
-                 "First_Name"'': 'Dr',
-                 "Last_Name": 'John',
-                 "Title": 'Head',
-                 "Department": 'CS'}
-    # print(user_info)
-    create_tables(db_cursor_object, user_info)
-    db_cursor_object.execute('DELETE FROM user_records')
+
+    filename = open("user_records.txt", 'r')
+    dictionary = {}
+    with filename as data:
+        for line in data:
+            new_format = line.strip().split()
+            dictionary = new_format
+
+    create_tables(db_cursor_object, dictionary)
 
     try:
         # db_cursor_object.execute('''INSERT INTO user_records (BSU_Email, First_Name, Last_Name, Title,
         #  Department) VALUES('gmail','dr', 'John', 'Head', 'CS')''')
 
         db_cursor_object.execute('''INSERT INTO user_records
-        VALUES(:BSU_Email, :First_Name, :Last_Name, :Title, :Department)''', user_info)
+        VALUES(?,?,?,?,?)''', dictionary)
 
         db_connection.commit()
 
