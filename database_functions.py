@@ -110,13 +110,43 @@ def create_user_columns(cursor: sqlite3.Cursor, user_records):
      into those columns """
 
     create_user_table = f'CREATE TABLE IF NOT EXISTS user_records (' \
-                        f'BSU_Email TEXT,' \
+                        f'BSU_Email TEXT PRIMARY KEY,' \
                         f'First_Name TEXT,' \
                         f'Last_Name TEXT,' \
                         f'Title TEXT,' \
                         f'Department TEXT);'
 
     cursor.execute(create_user_table)
+
+
+def create_user_db():
+    db_connection = create_db_connection()
+    db_cursor_object = create_db_cursor(db_connection)
+    user_info = {"BSU_Email": 'gmail',
+                 "First_Name"'': 'Dr',
+                 "Last_Name": 'John',
+                 "Title": 'Head',
+                 "Department": 'CS'}
+    # print(user_info)
+    create_tables(db_cursor_object, user_info)
+    db_cursor_object.execute('DELETE FROM user_records')
+
+    try:
+        # db_cursor_object.execute('''INSERT INTO user_records (BSU_Email, First_Name, Last_Name, Title,
+        #  Department) VALUES('gmail','dr', 'John', 'Head', 'CS')''')
+
+        db_cursor_object.execute('''INSERT INTO user_records
+        VALUES(:BSU_Email, :First_Name, :Last_Name, :Title, :Department)''', user_info)
+
+        db_connection.commit()
+
+    except sqlite3.Error as db_error:
+        print_red_text(f'A database error has occurred: {db_error}')
+
+    finally:
+        if db_connection:
+            db_connection.close()
+            print('The database has been closed')
 
 
 def create_wufoo_db():
@@ -138,7 +168,6 @@ def create_wufoo_db():
 
         # Clears table if data in it from previous use
         db_cursor_object.execute('DELETE FROM wufoo_data')
-        db_cursor_object.execute('DELETE FROM user_records')
 
         for dict_entry in data1:
             db_cursor_object.execute('''INSERT INTO wufoo_data VALUES(?, ?, ?, ?, ?, ?, ?, ?,

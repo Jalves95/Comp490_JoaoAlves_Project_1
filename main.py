@@ -1,7 +1,6 @@
 import database_functions
 import put_data_into_gui
 import sys
-import user_record_gui
 
 
 def show_options():
@@ -20,6 +19,7 @@ def main():
         answer = input("Please enter your choice:")
         if answer == "1":
             database_functions.create_wufoo_db()
+            database_functions.create_user_db()
             break
         elif answer == "2":
             put_data_into_gui.run_data_gui()
