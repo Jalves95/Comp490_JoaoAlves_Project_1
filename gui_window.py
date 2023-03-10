@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, \
-    QListWidget, QLineEdit, QLabel, QCheckBox, QListWidgetItem
+    QListWidget, QListWidgetItem
 from PySide6.QtGui import QCloseEvent
 import second_gui_window
 import user_record_gui
