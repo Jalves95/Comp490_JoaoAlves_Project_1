@@ -27,7 +27,6 @@ def main():
         elif answer == "3":
             sys.exit(0)
         else:
-            # print("Invalid Entry, ending program...")
             print("Invalid Entry, Choose Again.\n")
             show_options()
 

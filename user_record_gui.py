@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QCloseEvent
 from PySide6.QtWidgets import (
     QWidget,
     QPushButton,
@@ -22,11 +23,11 @@ class UserGui(QWidget):
             text_3 = self.last_name.text()
             text_4 = self.title.text()
             text_5 = self.department.text()
-            CurrentFile.write(text + '\t')
-            CurrentFile.write(text_2 + '\t')
-            CurrentFile.write(text_3 + '\t')
-            CurrentFile.write(text_4 + '\t')
-            CurrentFile.write(text_5)
+            CurrentFile.write(str(text.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text.replace(" ", "")))
 
     def __init__(self, data_to_show):
         super().__init__()
@@ -41,7 +42,6 @@ class UserGui(QWidget):
         self.setup_window()
 
     def setup_window(self):
-
         self.setWindowTitle("User Records")
         main_layout = QHBoxLayout()
         self.list_control = QListWidget()
@@ -50,7 +50,7 @@ class UserGui(QWidget):
         main_layout.addLayout(main_window)
         self.setLayout(main_layout)
         submit_button = QPushButton('Submit Claim', self)
-        submit_button.clicked.connect(self.save_input)
+        submit_button.clicked.connect(self.submit_claim)
         submit_button.resize(submit_button.sizeHint())
         main_window.addWidget(submit_button)
 
@@ -80,18 +80,28 @@ class UserGui(QWidget):
         one_liners_pane.addWidget(self.department, 2, 1)
         return main_panel
 
+    def submit_claim(self, event: QCloseEvent):
+        """ Function to update the GUI window with the wufoo data"""
 
-def save_to_file(self):
-    test1 = self.setup_window.text()
-    test2 = self.setup_window.text()
+        reply = QMessageBox.question(self, 'Message', 'You want to claim this entry?',
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.save_input()
+        else:
+            event.ignore()
 
-
-    if test1 == "" or test2 == "":
-        QMessageBox.information(self, "Please enter network address and number of host before selecting save", QMessageBox.Ok)
-        return
-    else:
-        with open("SubNetSave.txt", "w") as CurrentFile:
-            CurrentFile.write(str(test1))
-            CurrentFile.write("\n")
-            CurrentFile.write(str(test2))
-            QMessageBox.information(self, "Your file has been saved under file name SubNetSave.txt", QMessageBox.Ok)
+#
+# def save_to_file(self):
+#     test1 = self.setup_window.text()
+#     test2 = self.setup_window.text()
+#
+#     if test1 == "" or test2 == "":
+#         QMessageBox.information(self, "Please enter network address and number of host before selecting save",
+#                                 QMessageBox.Ok)
+#         return
+#     else:
+#         with open("SubNetSave.txt", "w") as CurrentFile:
+#             CurrentFile.write(str(test1))
+#             CurrentFile.write("\n")
+#             CurrentFile.write(str(test2))
+#             QMessageBox.information(self, "Your file has been saved under file name SubNetSave.txt", QMessageBox.Ok)

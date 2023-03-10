@@ -133,10 +133,7 @@ def create_user_db():
     create_tables(db_cursor_object, dictionary)
 
     try:
-        # db_cursor_object.execute('''INSERT INTO user_records (BSU_Email, First_Name, Last_Name, Title,
-        #  Department) VALUES('gmail','dr', 'John', 'Head', 'CS')''')
-
-        db_cursor_object.execute('''INSERT INTO user_records
+        db_cursor_object.execute('''INSERT or IGNORE INTO user_records
         VALUES(?,?,?,?,?)''', dictionary)
 
         db_connection.commit()

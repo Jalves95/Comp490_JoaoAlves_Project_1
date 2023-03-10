@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, \
 from PySide6.QtGui import QCloseEvent
 import second_gui_window
 import user_record_gui
+import database_functions
 
 
 class GuiWindow(QWidget):
@@ -16,10 +17,15 @@ class GuiWindow(QWidget):
     def setup(self):
         self.setGeometry(25, 50, 315, 500)
 
+        btn_update = QPushButton('Update Data', self)
+        btn_update.clicked.connect(self.update_gui_data)
+        btn_update.resize(btn_update.sizeHint())
+        btn_update.move(20, 465)
+
         btn_quit = QPushButton('Quit', self)
         btn_quit.clicked.connect(QApplication.instance().quit)
         btn_quit.resize(btn_quit.sizeHint())
-        btn_quit.move(200, 465)
+        btn_quit.move(220, 465)
 
         display_list = QListWidget(self)
         self.list_control = display_list
@@ -31,7 +37,7 @@ class GuiWindow(QWidget):
         btn_claim = QPushButton('Claim Entry', self)
         btn_claim.clicked.connect(self.demo_user_record)
         btn_claim.resize(btn_claim.sizeHint())
-        btn_claim.move(40, 465)
+        btn_claim.move(120, 465)
 
         self.show()
 
@@ -54,7 +60,8 @@ class GuiWindow(QWidget):
 
     def demo_list_item_selected(self, current: QListWidgetItem, previous: QListWidgetItem):
         """ Provided from Dr. Santore's GUI DEMO
-            Modified for my Project 1 Sprint 3 """
+            Modified for my Project 1 Sprint 3
+            Allows the user to select an entry to claim, showing another GUI when prompt"""
 
         selected_data = current.data(0)  # the data function has a 'role' choose 0 unless you extended QListWidgetItem
         entry = selected_data.split("\t")[0]  # split on tab and take the first resulting entry
@@ -76,10 +83,23 @@ class GuiWindow(QWidget):
             print(full_record)
             self.data_window = user_record_gui.UserGui(full_record)
             self.data_window.show()
+
+        else:
+            event.ignore()
+
+    def update_gui_data(self, event: QCloseEvent):
+        """ Function to update the GUI window with the wufoo data"""
+
+        reply = QMessageBox.question(self, 'Message', 'You want to update the data?',
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            database_functions.create_wufoo_db()
+            database_functions.create_user_db()
         else:
             event.ignore()
 
     def closeEvent(self, event: QCloseEvent):
+        """ Function to allow the user to quit the GUI when selected """
         reply = QMessageBox.question(self, 'Message', 'Are you sure you want to quit?',
                                      QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
