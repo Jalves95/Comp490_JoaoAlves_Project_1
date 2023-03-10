@@ -92,6 +92,18 @@ def test_setup_database():
     db_connection.commit()
 
 
+def test_data_inserted():
+    # db_connection = sqlite3.connect(':memory:')
+    # cursor = database_functions.create_db_cursor(db_connection)
+    connection = database_functions.create_db_connection()
+    cursor = database_functions.create_db_cursor(connection)
+    cursor.execute("SELECT Prefix, First_Name, Last_Name FROM wufoo_data WHERE Entry = 5")
+    record = cursor.fetchone()
+    assert record[0] == "Dr."
+    assert record[1] == "Matt"
+    assert record[2] == "Alex"
+
+
 def test_database(test_setup_database):
     # Test to make sure that there are 24 items in the database
     assert len('SELECT * FROM wufoo_data') == 24

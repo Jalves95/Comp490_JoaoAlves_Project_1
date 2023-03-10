@@ -1,13 +1,8 @@
-import pytest
-import sqlite3
-from PySide6.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QTextEdit, QMessageBox, QCheckBox
-from PySide6.QtWidgets import QWidget
+
 import database_functions
 import get_data
 import put_data_into_gui
-from PySide6 import QtCore, QtWidgets
 import gui_window
-import second_gui_window
 from PySide6 import QtCore
 
 

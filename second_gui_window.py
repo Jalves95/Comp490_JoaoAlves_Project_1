@@ -1,18 +1,6 @@
-import PySide6
-from PySide6.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QTextEdit, QMessageBox, QCheckBox
 from PySide6.QtCore import Qt
-from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtWidgets import (
     QWidget,
-    QPushButton,
-    QListWidget,
-    QApplication,
-    QListWidgetItem,
-    QHBoxLayout,
-    QVBoxLayout,
-    QLayout,
-    QGridLayout,
-    QPlainTextEdit,
     QLabel,
     QLineEdit,
     QCheckBox,
