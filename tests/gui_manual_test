@@ -1,0 +1,8 @@
+The idea of testing GUI is important since no one can tell what the user will see when the GUI loads.
+Everyone today has different operating systems that require different code to run. Someone using a MAC may
+have different outputs with someone running Linux. Testing GUI should continue, as no one wants any
+implications with customers seeing different output. For example, I remember when the Play Station 3 and
+X Box 360 came out. People were playing the same game, but some had more bugs than other. Perhaps, it
+was due to the lack of tests back in the day. Even though they were playing the same game, different bugs
+occurred. Testing GUI will help the developer understand the program, this leads to the developer
+understanding how each element in the GUI works. Which increased the reliability of their product.
