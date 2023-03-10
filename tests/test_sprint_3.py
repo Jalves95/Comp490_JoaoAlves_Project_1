@@ -18,7 +18,7 @@ def test_safe_get_request():
 
     json_data = get_data.safe_get_request()
     entries = json_data['Entries']
-    assert len(entries) <= 10
+    assert len(entries) >= 10
 
 
 def test_data_into_gui():
