@@ -14,3 +14,4 @@ urllib3==1.26.13
 requests
 PySide6~=6.4.2
 pytest-qt
+PyQt5~=5.15.9
