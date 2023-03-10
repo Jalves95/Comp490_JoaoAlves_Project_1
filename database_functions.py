@@ -129,7 +129,6 @@ def create_user_db():
         for line in data:
             new_format = line.strip().split()
             dictionary = new_format
-
     create_tables(db_cursor_object, dictionary)
 
     try:

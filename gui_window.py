@@ -17,27 +17,26 @@ class GuiWindow(QWidget):
     def setup(self):
         self.setGeometry(25, 50, 315, 500)
 
-        btn_update = QPushButton('Update Data', self)
+        btn_update = QPushButton('Update Wufoo Data', self)
         btn_update.clicked.connect(self.update_gui_data)
         btn_update.resize(btn_update.sizeHint())
-        btn_update.move(20, 465)
+        btn_update.move(10, 465)
 
         btn_quit = QPushButton('Quit', self)
         btn_quit.clicked.connect(QApplication.instance().quit)
         btn_quit.resize(btn_quit.sizeHint())
-        btn_quit.move(220, 465)
+        btn_quit.move(230, 465)
 
         display_list = QListWidget(self)
         self.list_control = display_list
         self.put_data_in_list(self.data)
         display_list.resize(315, 450)
         display_list.currentItemChanged.connect(self.demo_list_item_selected)
-        # display_list.currentItemChanged.connect(self.demo_list_item_selected2)
 
         btn_claim = QPushButton('Claim Entry', self)
         btn_claim.clicked.connect(self.demo_user_record)
         btn_claim.resize(btn_claim.sizeHint())
-        btn_claim.move(120, 465)
+        btn_claim.move(140, 465)
 
         self.show()
 
@@ -69,8 +68,6 @@ class GuiWindow(QWidget):
         # print(full_record)
         self.data_window = second_gui_window.GuiWindow2(full_record)
         self.data_window.show()
-        # self.data_window_2 = user_record_gui.UserGui(full_record)
-        # self.data_window_2.show()
 
     def demo_user_record(self, event: QCloseEvent):
         """ Provided from Dr. Santore's GUI DEMO
@@ -94,7 +91,6 @@ class GuiWindow(QWidget):
                                      QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             database_functions.create_wufoo_db()
-            database_functions.create_user_db()
         else:
             event.ignore()
 

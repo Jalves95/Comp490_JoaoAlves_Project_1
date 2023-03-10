@@ -1,3 +1,4 @@
+import database_functions
 from PyQt5.QtGui import QCloseEvent
 from PySide6.QtWidgets import (
     QWidget,
@@ -24,10 +25,10 @@ class UserGui(QWidget):
             text_4 = self.title.text()
             text_5 = self.department.text()
             CurrentFile.write(str(text.replace(" ", "")) + '\t')
-            CurrentFile.write(str(text.replace(" ", "")) + '\t')
-            CurrentFile.write(str(text.replace(" ", "")) + '\t')
-            CurrentFile.write(str(text.replace(" ", "")) + '\t')
-            CurrentFile.write(str(text.replace(" ", "")))
+            CurrentFile.write(str(text_2.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text_3.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text_4.replace(" ", "")) + '\t')
+            CurrentFile.write(str(text_5.replace(" ", "")))
 
     def __init__(self, data_to_show):
         super().__init__()
@@ -53,6 +54,10 @@ class UserGui(QWidget):
         submit_button.clicked.connect(self.submit_claim)
         submit_button.resize(submit_button.sizeHint())
         main_window.addWidget(submit_button)
+
+        update_button = QPushButton("Update Claim to Database", self)
+        update_button.clicked.connect(self.update_gui_data)
+        main_window.addWidget(update_button)
 
         quit_button = QPushButton("Quit", self)
         quit_button.clicked.connect(QApplication.instance().quit)
@@ -90,18 +95,12 @@ class UserGui(QWidget):
         else:
             event.ignore()
 
-#
-# def save_to_file(self):
-#     test1 = self.setup_window.text()
-#     test2 = self.setup_window.text()
-#
-#     if test1 == "" or test2 == "":
-#         QMessageBox.information(self, "Please enter network address and number of host before selecting save",
-#                                 QMessageBox.Ok)
-#         return
-#     else:
-#         with open("SubNetSave.txt", "w") as CurrentFile:
-#             CurrentFile.write(str(test1))
-#             CurrentFile.write("\n")
-#             CurrentFile.write(str(test2))
-#             QMessageBox.information(self, "Your file has been saved under file name SubNetSave.txt", QMessageBox.Ok)
+    def update_gui_data(self, event: QCloseEvent):
+        """ Function to update the GUI window with the wufoo data"""
+
+        reply = QMessageBox.question(self, 'Message', 'You want to update the data?',
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            database_functions.create_user_db()
+        else:
+            event.ignore()
