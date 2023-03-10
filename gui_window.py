@@ -80,9 +80,8 @@ class GuiWindow(QWidget):
             print(full_record)
             self.data_window = user_record_gui.UserGui(full_record)
             self.data_window.show()
-
         else:
-            event.ignore()
+            pass
 
     def update_gui_data(self, event: QCloseEvent):
         """ Function to update the GUI window with the wufoo data"""
@@ -92,7 +91,7 @@ class GuiWindow(QWidget):
         if reply == QMessageBox.Yes:
             database_functions.create_wufoo_db()
         else:
-            event.ignore()
+            pass
 
     def closeEvent(self, event: QCloseEvent):
         """ Function to allow the user to quit the GUI when selected """

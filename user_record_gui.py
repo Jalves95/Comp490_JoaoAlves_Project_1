@@ -93,7 +93,7 @@ class UserGui(QWidget):
         if reply == QMessageBox.Yes:
             self.save_input()
         else:
-            event.ignore()
+            pass
 
     def update_gui_data(self, event: QCloseEvent):
         """ Function to update the GUI window with the wufoo data"""
@@ -103,4 +103,4 @@ class UserGui(QWidget):
         if reply == QMessageBox.Yes:
             database_functions.create_user_db()
         else:
-            event.ignore()
+            pass
