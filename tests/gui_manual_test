@@ -6,3 +6,5 @@ X Box 360 came out. People were playing the same game, but some had more bugs th
 was due to the lack of tests back in the day. Even though they were playing the same game, different bugs
 occurred. Testing GUI will help the developer understand the program, this leads to the developer
 understanding how each element in the GUI works. Which increased the reliability of their product.
+GUI testings should verify that the correct information is being shown, that the user see's the intended
+information.
