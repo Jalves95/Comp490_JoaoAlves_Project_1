@@ -92,9 +92,7 @@ def test_setup_database():
     db_connection.commit()
 
 
-def test_data_inserted():
-    # db_connection = sqlite3.connect(':memory:')
-    # cursor = database_functions.create_db_cursor(db_connection)
+def test_database_functions():
     connection = database_functions.create_db_connection()
     cursor = database_functions.create_db_cursor(connection)
     cursor.execute("SELECT Prefix, First_Name, Last_Name FROM wufoo_data WHERE Entry = 5")
